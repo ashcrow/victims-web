@@ -37,7 +37,7 @@ CACHE_THRESHOLD = 20
 MONGODB_SETTINGS = {
     'DB': environ.get('MONGODB_DATABASE', 'victims'),
     'HOST': environ.get('MONGODB_SERVICE_HOST', '127.0.0.1'),
-    'PORT': environ.get('MONGODB_SERVICE_PORT', '27017')
+    'PORT': int(environ.get('MONGODB_SERVICE_PORT', '27017'))
 }
 
 # Available roles
