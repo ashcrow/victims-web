@@ -35,9 +35,9 @@ CACHE_THRESHOLD = 20
 
 # MongoDB Configuration
 MONGODB_SETTINGS = {
-    'DB': 'victims',
-    'HOST': '127.0.0.1',
-    'PORT': 27017,
+    'DB': environ.get('MONGODB_DATABASE', 'victims'),
+    'HOST': environ.get('MONGODB_SERVICE_HOST', '127.0.0.1'),
+    'PORT': environ.get('MONGODB_SERVICE_PORT', '27017')
 }
 
 # Available roles
