@@ -22,7 +22,7 @@ from functools import wraps
 from hashlib import md5, sha512
 from hmac import HMAC
 from time import strptime, mktime
-from urlparse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin
 
 from flask import Response, request, flash
 from flask_bcrypt import check_password_hash

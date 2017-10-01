@@ -42,7 +42,7 @@ def update_front_page_stats():
 
     # Generate counts for objects and for each format
     # data will contain hashes, hashes_jars, hashes_eggs etc.
-    groups = SUBMISSION_GROUPS.keys()
+    groups = list(SUBMISSION_GROUPS.keys())
     groups.sort()
     data = {'groups': groups, 'stats': {}}
     for group in groups:

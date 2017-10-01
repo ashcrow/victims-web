@@ -1,7 +1,7 @@
 from copy import deepcopy
 from json import loads
 from subprocess import check_output, CalledProcessError
-from urlparse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin
 
 from flask import request, flash
 from os.path import isfile
@@ -93,7 +93,7 @@ def hash_submission(submission_id):
 
 
 def set_hash(submission):
-    if isinstance(submission, basestring):
+    if isinstance(submission, str):
         sid = str(submission)
     else:
         sid = str(submission.id)

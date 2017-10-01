@@ -129,7 +129,7 @@ def process_submission(form, group=None):
         # remove any empty values
         coordinates = dict(
             (k, v)
-            for k, v in coordinates.iteritems()
+            for k, v in coordinates.items()
             if v is not None and len(v) > 0
         )
 
@@ -147,11 +147,11 @@ def process_submission(form, group=None):
         current_app.config['INDEX_REFRESH_FLAG'] = True
 
         flash('Archive Submitted for processing', 'info')
-    except ValueError, ve:
+    except ValueError as ve:
         flash(escape(ve.message), 'error')
-    except ValidationError, ve:
+    except ValidationError as ve:
         flash(escape(ve.message), 'error')
-    except OSError, oe:
+    except OSError as oe:
         flash('Could not upload file due to a server side error', 'error')
         current_app.logger.debug(oe)
 

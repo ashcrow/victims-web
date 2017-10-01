@@ -161,13 +161,13 @@ def register_user():
             flash('Registration successful, welcome %s!' % (username),
                   category='info')
             return redirect(url_for('ui.index'))
-        except ValidationError, ve:
+        except ValidationError as ve:
             invalids = ','.join([f.title() for f in ve.errors.keys()])
             msg = 'Invalid: %s' % (invalids)
             flash(escape(msg), category='error')
-        except ValueError, ve:
+        except ValueError as ve:
             flash(escape(ve.message), category='error')
-        except Exception, ex:
+        except Exception as ex:
             current_app.logger.info(ex)
             flash('An unknown error has occured.', category='error')
     else:

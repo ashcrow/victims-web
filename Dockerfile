@@ -4,7 +4,7 @@ ENV APP_SRC=/opt/source \
     VICTIMS_BASE_DIR=/var/run/victims
 
 RUN apk --update --no-cache add \
-        python python-dev py2-pip py-cffi \
+        python3 python3-dev py-cffi \
         g++ \
     && install -d ${VICTIMS_BASE_DIR} ${APP_SRC}
 

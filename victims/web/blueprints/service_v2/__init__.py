@@ -99,7 +99,7 @@ class StreamedSerialResponseValue(object):
     def _json(self, item):
         if isinstance(item, JsonifyMixin):
             return item.jsonify(self.fields)
-        elif isinstance(item, str) or isinstance(item, unicode):
+        elif isinstance(item, str):
             return str(item)
         else:
             return json.dumps(item)

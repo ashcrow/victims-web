@@ -22,13 +22,16 @@
 # SOFTWARE.
 #
 
+import io
+
 from hashlib import md5, sha1
+from io import StringIO
 from logging import getLogger
-from Queue import Queue
-from StringIO import StringIO
+from queue import Queue
 from threading import Thread
 from time import time
-from urllib2 import Request, urlopen, HTTPError, URLError
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 USER_AGENT = 'victims-web-plugin/downloader'
 BUF_SIZE = 4096
@@ -68,9 +71,9 @@ def download(url, target, async=False, close_target=False, quiet=True):
                     '[Downloading] Download %s completed in %f secs' %
                     (url, (t1 - t0))
                 )
-        except HTTPError, e:
+        except HTTPError as e:
             raise DownloadException(url, e)
-        except URLError, e:
+        except URLError as e:
             raise DownloadException(url, e)
 
 
@@ -118,7 +121,7 @@ def checksum(filepath, checksum_type):
         hasher = sha1()
 
     buf_size = 1024 * 8
-    file_to_check = file(filepath, 'r')
+    file_to_check = io.open(filepath, 'r')
     buf = file_to_check.read(buf_size)
     while len(buf) > 0:
         hasher.update(buf)

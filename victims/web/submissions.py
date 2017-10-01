@@ -69,7 +69,7 @@ def get_upload_folder():
     upload_dir = config.UPLOAD_FOLDER
     if not isdir(upload_dir):
         config.LOGGER.info('Creating upload directory: %s' % (upload_dir))
-        makedirs(upload_dir, 0755)
+        makedirs(upload_dir, 0o755)
     return upload_dir
 
 

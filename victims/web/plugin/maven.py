@@ -25,7 +25,8 @@
 from logging import getLogger
 from string import Template
 from time import strptime, mktime
-from urllib2 import urlopen, HTTPError
+from urllib.request import urlopen
+from urllib.error import HTTPError
 from xml.etree import ElementTree
 
 from os.path import join

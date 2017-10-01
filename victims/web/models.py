@@ -46,7 +46,8 @@ def generate_client_secret(apikey):
 
 
 def generate_apikey(username):
-    apikey = HMAC(uuid4().hex, username).hexdigest()
+    
+    apikey = HMAC(uuid4().bytes, username).hexdigest()
     return apikey.upper()
 
 
@@ -82,7 +83,6 @@ class RestrictedDict(dict):
     def __setitem__(self, key, val):
         if key not in self.validkeys:
             raise KeyError
-        print(key)
         dict.__setitem__(self, key, val)
 
 
@@ -340,10 +340,12 @@ class Hash(JsonifyMixin, EmbeddedDocument, ValidatedDocument):
             cves.append(cve.id)
         return cves
 
-    def append_cves(self, cves=[]):
+    def append_cves(self, cves=None):
         """
         Append a list of cves to this instance. The current datetime is used.
         """
+        if cves is None:
+            cves = []
         cvelist = [cve.id for cve in self.cves]
         for cve in cves:
             if cve not in cvelist:

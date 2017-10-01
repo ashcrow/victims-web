@@ -3,6 +3,8 @@ Victims Web Service |Build Status| |PyPI version|
 
 The victims web application.
 
+**Note**: Python 3 is now required!!
+
 Report an Issue
 ---------------
 

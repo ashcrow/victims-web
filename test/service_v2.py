@@ -19,7 +19,7 @@ Service version 2 testing.
 """
 
 import json
-from StringIO import StringIO
+from io import StringIO
 from base64 import b64encode
 from datetime import datetime
 from hashlib import md5
@@ -67,7 +67,7 @@ class TestServiceV2(UserTestCase):
 
         # Anything that is not a valid API call should return 404
         for kind in self.points:
-            for badtype in [0, 'NotAnInt', 10.436, 0x80, u'bleh']:
+            for badtype in [0, 'NotAnInt', 10.436, 0x80, 'bleh']:
                 resp = self.app.get('/service/v2/%s/%s/' % (kind, badtype))
                 assert resp.status_code == 404
                 assert resp.content_type == 'application/json'
@@ -93,8 +93,8 @@ class TestServiceV2(UserTestCase):
     def verify_data_structure(self, result, expected, two_way=False):
         assert len(result) > 0
         for item in result:
-            assert 'fields' in item.keys()
-            for key, testtype in expected.items():
+            assert 'fields' in list(item.keys())
+            for key, testtype in list(expected.items()):
                 assert isinstance(item['fields'][key], testtype)
             if two_way:
                 for key in item['fields']:
@@ -105,20 +105,20 @@ class TestServiceV2(UserTestCase):
         Ensures the response structure is correct for a GET request.
         """
         expected = {
-            'date': basestring,
-            'name': basestring,
-            'version': basestring,
-            'format': basestring,
+            'date': str,
+            'name': str,
+            'version': str,
+            'format': str,
             'hashes': dict,
-            'vendor': basestring,
+            'vendor': str,
             'cves': list,
-            'status': basestring,
+            'status': str,
             'meta': list,
-            'submitter': basestring,
-            'submittedon': basestring,
+            'submitter': str,
+            'submittedon': str,
         }
 
-        params = 'fields=%s' % (','.join(expected.keys()))
+        params = 'fields=%s' % (','.join(list(expected.keys())))
         resp = self.app.get(
             '/service/v2/update/1970-01-01T00:00:00/?%s' % (params)
         )
@@ -136,7 +136,7 @@ class TestServiceV2(UserTestCase):
         result = json.loads(resp.data)
 
         expected = {
-            'name': basestring,
+            'name': str,
             'hashes': dict
         }
         self.verify_data_structure(result, expected, True)
