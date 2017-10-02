@@ -18,11 +18,10 @@
 Unittesting.
 """
 
+import re
 import unittest
 
-import re
-from flask.ext.bcrypt import generate_password_hash
-
+from flask_bcrypt import generate_password_hash
 from victims.web import application
 from victims.web.models import Account
 from victims.web.user import delete_user
