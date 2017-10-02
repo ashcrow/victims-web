@@ -19,8 +19,8 @@ Module which results with a ready to use wsgi application.
 """
 
 import logging.config
-
 import os
+
 from flask import Flask, render_template, session
 from flask_bootstrap import Bootstrap
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface

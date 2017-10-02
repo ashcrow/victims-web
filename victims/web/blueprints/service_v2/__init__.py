@@ -341,7 +341,9 @@ def submit_archive(group):
         current_app.logger.info(e.message)
         return error()
 
+
 SUBMISSION_ROUTES = [submit_hash, submit_archive]
+
 
 for v in [update, remove, cves]:
     ssl_exclude(update)

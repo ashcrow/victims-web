@@ -11,11 +11,13 @@ jobs:
       before_script:
         - mongoimport -d victims -c hashes test/data/mongo_test_hash.json
         - mongoimport -d victims -c users test/data/mongo_test_user.json
-        - pip install coverage pep8
+        - pip install -U -r dev-requirements.txt
+        - pip install -U -r requirements.txt
       install:
         - pip install -e .
       script:
-        - pep8 --repeat victims test
+        - flake8 ./src/
+        - flake8 ./test/
         - nosetests --logging-clear-handlers --with-coverage --cover-package=victims.web --cover-min-percentage=0 -v test/*.py
     - stage: sonar
       dist: trusty

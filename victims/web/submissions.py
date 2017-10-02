@@ -30,8 +30,9 @@ from victims.web.plugin.crosstalk import indexmon
 from victims.web.util import set_hash
 
 
-def submit(submitter, source, group=None, filename=None, suffix=None, cves=None,
-           metadata=None, entry=None, approval='REQUESTED', coordinates=None):
+def submit(submitter, source, group=None, filename=None, suffix=None,
+           cves=None, metadata=None, entry=None, approval='REQUESTED',
+           coordinates=None):
 
     if cves is None:
         cves = []

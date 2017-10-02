@@ -46,7 +46,6 @@ def generate_client_secret(apikey):
 
 
 def generate_apikey(username):
-    
     apikey = HMAC(uuid4().bytes, username).hexdigest()
     return apikey.upper()
 

@@ -111,6 +111,7 @@ class DownloadThreadPool(object):
             self.init_threads()
         self.queue.put((url, target))
 
+
 _pool = DownloadThreadPool(3)
 
 
