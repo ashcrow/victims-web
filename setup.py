@@ -32,13 +32,18 @@ def extract_requirements(filename):
     ]
 
 
-def find_package_data(source, strip=''):
+def find_package_data(sources_list):
+    """
+    :param sources_list: List of tuples like [(source, strip),...]
+    :type sources_list: tuple
+    """
     pkg_data = []
-    for root, dirs, files in walk(source):
-        pkg_data += map(
-            lambda f: path.join(root.replace(strip, '').lstrip(sep), f),
-            files
-        )
+    for source, strip in sources_list:
+        for root, dirs, files in walk(source):
+            pkg_data += map(
+                lambda f: path.join(root.replace(strip, '').lstrip(sep), f),
+                files
+            )
     return pkg_data
 
 
@@ -74,14 +79,11 @@ setup(
     include_package_data=True,
     package_data={
         'victims.web':
-            find_package_data(
-                'victims/web/templates', 'victims/web')
-            + find_package_data(
-                'victims/web/static', 'victims/web')
-            + find_package_data(
-                'victims/web/blueprints/ui/templates', 'victims/web')
-            + find_package_data(
-                'victims/web/blueprints/ui/static', 'victims/web')
+            find_package_data([
+                ('victims/web/templates', 'victims/web'),
+                ('victims/web/static', 'victims/web'),
+                ('victims/web/blueprints/ui/templates', 'victims/web'),
+                ('victims/web/blueprints/ui/static', 'victims/web')])
     },
     install_requires=install_requires,
     tests_require=test_require,
