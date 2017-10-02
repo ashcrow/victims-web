@@ -30,8 +30,14 @@ from victims.web.plugin.crosstalk import indexmon
 from victims.web.util import set_hash
 
 
-def submit(submitter, source, group=None, filename=None, suffix=None, cves=[],
-           metadata={}, entry=None, approval='REQUESTED', coordinates=None):
+def submit(submitter, source, group=None, filename=None, suffix=None, cves=None,
+           metadata=None, entry=None, approval='REQUESTED', coordinates=None):
+
+    if cves is None:
+        cves = []
+    if metadata is None:
+        metadata = {}
+
     config.LOGGER.info('Submitting: %s' % (
         ', '.join(['%s:%s' % (k, v) for (k, v) in locals().items()])))
     submission = Submission()
