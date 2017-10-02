@@ -1,3 +1,5 @@
+import mongoengine
+
 from os import environ, makedirs
 from os.path import isfile, isdir, join
 from datetime import timedelta
@@ -42,6 +44,9 @@ MONGODB_SETTINGS = {
     'HOST': environ.get('MONGODB_DB_HOST', 'localhost'),
     'PORT': int(environ.get('MONGODB_DB_PORT', 27017)),
 }
+
+# Set the default
+mongoengine.connect(MONGODB_SETTINGS['DB'], alias='default')
 
 # Available roles
 VICTIMS_ROLES = ['admin', 'trusted']
