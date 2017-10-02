@@ -1,3 +1,4 @@
 Flask-DebugToolbar
 flake8
 coverage
+nose
